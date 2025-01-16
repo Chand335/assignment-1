@@ -1,0 +1,105 @@
+<!-- resources/views/prescriptions/pdf.blade.php -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Prescription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .prescription-container {
+            border: 3px double #000;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .doctor-name {
+            background-color: #ffe4e1;
+            color: #ff0000;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #000;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .info-row {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+        .value {
+            display: inline-block;
+        }
+        .prescription-text {
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .address {
+            background-color: #ffe4e1;
+            color: #ff0000;
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px solid #000;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .date {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="prescription-container">
+        <!-- Doctor Name Header -->
+        <div class="doctor-name">
+            {{ $prescription->doctor_name }}
+        </div>
+
+        <!-- Appointment Date -->
+        <div class="date">
+            Date Of Appointment: {{ Carbon\Carbon::parse($prescription->date_of_appointment)->format('jS F Y') }}
+        </div>
+
+        <!-- Patient Details -->
+        <div class="info-row">
+            <span class="label">Patient Name:</span>
+            <span class="value">{{ $prescription->patient_name }}</span>
+        </div>
+
+        <!-- Disease Details -->
+        <div class="info-row">
+            <span class="label">Disease Name:</span>
+            <span class="value">{{ $prescription->disease_name }}</span>
+        </div>
+
+        <!-- Medicine Details -->
+        <div class="info-row">
+            <span class="label">Medicine Name:</span>
+            <span class="value">{{ $prescription->medicine_name }}</span>
+        </div>
+
+        <!-- Prescription Text -->
+        <div class="prescription-text">
+            <span class="label">Prescription:</span>
+            <span class="value">{{ $prescription->prescription }}</span>
+        </div>
+
+        <!-- Address Footer -->
+        <div class="address">
+            4<sup>th</sup> Floor, OCAC Tower, BBSR
+        </div>
+    </div>
+</body>
+</html>
