@@ -1,0 +1,166 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class DatabaseSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $this->call([
+            DiseaseMasterSeeder::class,
+            MedicineMasterSeeder::class,
+            DoctorMasterSeeder::class,
+            DoctorAppointmentSeeder::class,
+            PrescriptionSeeder::class,
+        ]);
+    }
+}
+
+class DiseaseMasterSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $diseases = [
+            ['disease_name' => 'Diarrhea'],
+            ['disease_name' => 'Headaches'],
+            ['disease_name' => 'Allergies'],
+        ];
+
+        foreach ($diseases as $disease) {
+            DB::table('disease_master')->insert($disease);
+        }
+    }
+}
+
+class MedicineMasterSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $medicines = [
+            ['medicine_name' => 'Sulfatrim', 'disease_id' => 1],
+            ['medicine_name' => 'Bactrim', 'disease_id' => 1],
+            ['medicine_name' => 'Lomotil', 'disease_id' => 1],
+            ['medicine_name' => 'Aspirin', 'disease_id' => 2],
+            ['medicine_name' => 'Acetaminophen', 'disease_id' => 2],
+            ['medicine_name' => 'Prochlorperazine', 'disease_id' => 2],
+            ['medicine_name' => 'Cetirizine', 'disease_id' => 3],
+            ['medicine_name' => 'Desloratadine', 'disease_id' => 3],
+            ['medicine_name' => 'Loratadine', 'disease_id' => 3],
+        ];
+
+        foreach ($medicines as $medicine) {
+            DB::table('medicine_master')->insert($medicine);
+        }
+    }
+}
+
+class DoctorMasterSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $doctors = [
+            [
+                'doctor_name' => 'Dr. Sunil Choudhury',
+                'doctor_phone' => '9861098610',
+                'doctor_email' => 'sunil@gmail.com'
+            ],
+            [
+                'doctor_name' => 'Dr. Hara Mohan Mohanty',
+                'doctor_phone' => '9771497714',
+                'doctor_email' => 'hara@gmail.com'
+            ],
+            [
+                'doctor_name' => 'Dr. Manoj Singh',
+                'doctor_phone' => '9861198611',
+                'doctor_email' => 'manoj@gmail.com'
+            ],
+        ];
+
+        foreach ($doctors as $doctor) {
+            DB::table('doctor_master')->insert($doctor);
+        }
+    }
+}
+
+class DoctorAppointmentSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $appointments = [
+            [
+                'doctor_id' => 1,
+                'patient_name' => 'Rama Barik',
+                'patient_phone' => '9861298612',
+                'date_of_appointment' => '2023-04-29',
+                'patient_status' => 'A'
+            ],
+            [
+                'doctor_id' => 1,
+                'patient_name' => 'Rosa Sahoo',
+                'patient_phone' => '9861398613',
+                'date_of_appointment' => '2023-04-29',
+                'patient_status' => 'A'
+            ],
+            [
+                'doctor_id' => 2,
+                'patient_name' => 'Rabi Muduli',
+                'patient_phone' => '9861498614',
+                'date_of_appointment' => '2023-04-28',
+                'patient_status' => 'P'
+            ],
+            [
+                'doctor_id' => 2,
+                'patient_name' => 'Rupa Mohanty',
+                'patient_phone' => '9861598615',
+                'date_of_appointment' => '2023-04-28',
+                'patient_status' => 'P'
+            ],
+            [
+                'doctor_id' => 2,
+                'patient_name' => 'Raju Pattanaik',
+                'patient_phone' => '9861698616',
+                'date_of_appointment' => '2023-04-29',
+                'patient_status' => 'A'
+            ],
+            [
+                'doctor_id' => 2,
+                'patient_name' => 'Rupali Mishra',
+                'patient_phone' => '9861798617',
+                'date_of_appointment' => '2023-04-29',
+                'patient_status' => 'A'
+            ],
+        ];
+
+        foreach ($appointments as $appointment) {
+            DB::table('doctor_appointment')->insert($appointment);
+        }
+    }
+}
+
+class PrescriptionSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $prescriptions = [
+            [
+                'doctor_appointment_id' => 1,
+                'disease_id' => 3,
+                'medicine_id' => 2,
+                'prescription' => 'Prescription details-1'
+            ],
+            [
+                'doctor_appointment_id' => 2,
+                'disease_id' => 4,
+                'medicine_id' => 8,
+                'prescription' => 'Prescription details-2'
+            ],
+        ];
+
+        foreach ($prescriptions as $prescription) {
+            DB::table('prescription')->insert($prescription);
+        }
+    }
+}
