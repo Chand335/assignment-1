@@ -143,3 +143,44 @@
     </script>
 </body>
 </html>
+ <!-- Prescriptions Table -->
+        <div class="bg-white rounded-lg shadow overflow-x-auto">
+            <table class="min-w-full">
+                <thead class="bg-yellow-600 text-white">
+                    <tr>
+                        <th class="py-3 px-4 text-left">SLNO</th>
+                        <th class="py-3 px-4 text-left">Date Of Appointment</th>
+                        <th class="py-3 px-4 text-left">Doctor Name</th>
+                        <th class="py-3 px-4 text-left">Patient Name</th>
+                        <th class="py-3 px-4 text-left">Disease Name</th>
+                        <th class="py-3 px-4 text-left">Medicine Name</th>
+                        <th class="py-3 px-4 text-left">Appointment Status</th>
+                        <th class="py-3 px-4 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($prescriptions as $prescription)
+                        {{-- @dd($prescription); --}}
+                        <tr class="border-b">
+                            <td class="py-2 px-4">{{ $loop->iteration }}</td>
+                            <td class="py-2 px-4">{{ $prescription->doctor_appointments->date_of_appointment }}</td>
+                            <td class="py-2 px-4">{{ $prescription->prescription }}</td>
+                            <td class="py-2 px-4">{{ $prescription->doctor_appointments->patient_name }}</td>
+                            <td class="py-2 px-4">{{ $prescription->disease->disease_name ?? 'NULL' }}</td>
+                            <td class="py-2 px-4">{{ $prescription->medicine->medicine_name ?? 'NULL' }}</td>
+                            <td class="py-2 px-4">
+                                {{ $prescription->disease ? 'Prescribed' : 'Appointed' }}
+                            </td>
+                            <td class="py-2 px-4">
+                                @if ($prescription->disease)
+                                    <a href="{{ route('prescriptions.download', $prescription->id) }}"
+                                        class="text-purple-600 hover:text-purple-800">
+                                        Download Prescription
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
