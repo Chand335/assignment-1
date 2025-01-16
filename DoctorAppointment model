@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class DoctorAppointment extends Model
+{
+    use HasFactory;
+    protected $table = 'doctor_appointments';
+
+    protected $fillable = [
+        'doctor_id',
+        'patient_name',
+        'patient_phone',
+        'date_of_appointment',
+        'patient_status'
+    ];
+
+
+    public function prescription(): HasOne
+    {
+        return $this->hasOne(Prescription::class);
+    }
+
+     /**
+     * Get the doctor that owns the doctor_appointment.
+     */
+    public function doctor(): BelongsTo
+    {
+        return $this->belongsTo(doctor::class ,'doctor_id');
+    }
+}
