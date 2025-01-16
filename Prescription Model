@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Prescription extends Model
+{
+    use HasFactory;
+    protected $table = 'prescriptions';
+
+    protected $fillable = [
+        'disease_id',
+        'medicine_id',
+        'doctor_appointment_id',
+        'prescription'
+    ];
+
+    /**
+     * Get the doctor_appointments that owns the prescription.
+     */
+    public function doctor_appointments(): BelongsTo
+    {
+        return $this->belongsTo(DoctorAppointment::class ,'doctor_appointment_id');
+    }
+    /**
+     * Get the disease that owns the prescription.
+     */
+    public function disease(): BelongsTo
+    {
+        return $this->belongsTo(Disease::class ,'disease_id');
+    }
+    /**
+     * Get the medicine that owns the prescription.
+     */
+    public function medicine(): BelongsTo
+    {
+        return $this->belongsTo(Medicine::class ,'medicine_id');
+    }
+
+
+}
